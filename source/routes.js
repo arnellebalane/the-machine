@@ -6,8 +6,7 @@ var config = require('./config');
 
 var router = express.Router();
 var people = datastore('people');
-
-var subscriptions = [];
+var subscriptions = datastore('subscriptions');
 
 
 router.get('/', function(req, res) {
@@ -30,35 +29,48 @@ router.get('/person/:id', function(req, res) {
 
 router.post('/subscribe', function(req, res) {
     var id = req.body.id;
-    if (subscriptions.indexOf(id) === -1) {
-        subscriptions.push(id);
-    }
-    res.status(200).end();
+    var query = [['filter', 'id', '=', id]];
+    subscriptions.query(query)
+        .then(function(results) {
+            if (results.length === 0) {
+                return subscriptions.create({ id: id });
+            }
+            return results[0];
+        })
+        .then(function(subscription) {
+            res.status(200).end();
+        });
 });
 
 
 router.post('/notify', function(req, res) {
-    if (subscriptions.length) {
-        getRandomPerson().then(function(person) {
-            var options = {
-                url: 'https://android.googleapis.com/gcm/send',
-                headers: {
-                    Authorization: 'key=' + config.get('GCM_API_KEY')
-                },
-                body: {
-                    registration_ids: subscriptions,
-                    notification: {
-                        title: 'We have a new number.',
-                        body: person.name,
-                        icon: person.image
-                    }
-                },
-                json: true
+    subscriptions.all().then(function(results) {
+        if (results.length > 0) {
+            var registrationIds = results.map(function(subscription) {
+                return subscription.id;
+            });
 
-            };
-            request.post(options);
-        });
-    }
+            getRandomPerson().then(function(person) {
+                var options = {
+                    url: 'https://android.googleapis.com/gcm/send',
+                    headers: {
+                        Authorization: 'key=' + config.get('GCM_API_KEY')
+                    },
+                    body: {
+                        registration_ids: registrationIds,
+                        notification: {
+                            title: 'We have a new number.',
+                            body: person.name,
+                            icon: '/static/images/logo.png'
+                        }
+                    },
+                    json: true
+
+                };
+                request.post(options);
+            });
+        }
+    });
     res.status(200).end();
 });
 
