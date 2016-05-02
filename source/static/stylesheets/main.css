@@ -14,4 +14,48 @@ html {
 
 body {
     height: 100vh;
+    font-family: "Ubuntu Mono", monospace;
+    color: #fcffff;
+    background-color: #110f13;
+}
+
+
+
+/** Standby Screen **/
+
+.screen--standby {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.screen--standby .status-label {
+    display: block;
+    padding: 0.5em 1em;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #110f13;
+    background-color: #fcffff;
+}
+
+
+.screen--standby .status {
+    padding: 0 2rem;
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+
+/** Widgets **/
+
+.tracker {
+    width: 10rem;
+    height: 10rem;
+    border: 3px dashed #ebe97a;
 }
