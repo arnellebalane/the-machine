@@ -26,10 +26,28 @@ body {
 }
 
 
+a,
 input,
 button {
     font: inherit;
     color: inherit;
+}
+
+
+.page-footer {
+    padding: 4rem 1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+
+.page-footer a {
+    margin: 0 5rem;
+    font-size: 3.2rem;
+    text-decoration: none;
 }
 
 
@@ -154,6 +172,16 @@ button {
 
 
 @media all and (min-device-width: 425px) {
+
+    .page-footer {
+        padding: 2rem 1rem;
+    }
+
+
+    .page-footer a {
+        font-size: 1.6rem;
+    }
+
 
     /** Standby Screen **/
 
