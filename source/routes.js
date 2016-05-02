@@ -19,6 +19,18 @@ router.get('/admin', function(req, res) {
 });
 
 
+router.get('/search', function(req, res) {
+    var query = [['filter', 'name', '=', req.query.query]];
+    people.query(query).then(function(results) {
+        if (results.length) {
+            res.redirect('/person/' + results[0].id);
+        } else {
+            res.redirect('/');
+        }
+    });
+});
+
+
 router.get('/person/:id', function(req, res) {
     var query = [['filter', 'id', '=', parseInt(req.params.id)]];
     people.query(query).then(function(results) {
