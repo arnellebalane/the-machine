@@ -20,7 +20,7 @@ router.get('/admin', function(req, res) {
 
 
 router.get('/search', function(req, res) {
-    var query = [['filter', 'name', '=', req.query.query]];
+    var query = [['filter', 'name', '=', humanize(req.query.query)]];
     people.query(query).then(function(results) {
         if (results.length) {
             res.redirect('/person/' + results[0].id);
@@ -111,6 +111,15 @@ function getRandomPerson() {
     return people.query(query).then(function(results) {
         return results[0];
     });
+}
+
+
+function humanize(string) {
+    return string.split(/\s+/g)
+        .map(function(word) {
+            return word[0].toUpperCase() + word.substring(1).toLowerCase();
+        })
+        .join(' ');
 }
 
 
