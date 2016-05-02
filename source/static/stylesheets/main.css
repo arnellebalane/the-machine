@@ -120,7 +120,7 @@ button {
 
 .new-number-text {
     padding: 0 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-size: 3rem;
     text-align: center;
     text-transform: uppercase;
@@ -128,7 +128,7 @@ button {
 
 
 .notify-assets-btn {
-    padding: 1em 2em;
+    padding: 0.75em 1.25em;
     border: none;
     font-size: 2rem;
     font-weight: bold;
