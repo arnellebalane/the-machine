@@ -1,8 +1,3 @@
-self.addEventListener('install', function(event) {
-    console.log('Service Worker Installed.');
-});
-
-
 self.addEventListener('push', function(event) {
     event.waitUntil(
         self.registration.showNotification('The Machine', {

@@ -59,7 +59,7 @@ router.post('/notify', function(req, res) {
                     body: {
                         registration_ids: registrationIds,
                         notification: {
-                            title: 'We have a new number.',
+                            title: 'We have a new number',
                             body: person.name,
                             icon: '/static/images/logo.png'
                         }
