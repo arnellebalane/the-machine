@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <span class="status-label">Status</span>
-    <h1 class="status status--standby">Standby for orders</h1>
+    <form action="/search" class="search">
+        <input type="input" class="search__input" autocomplete="off" autofocus>
+        <button class="search__button">Search Person</button>
+    </form>
 
     <script src="/static/javascripts/main.js"></script>
 {% endblock %}

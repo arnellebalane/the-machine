@@ -26,6 +26,7 @@ body {
 }
 
 
+input,
 button {
     font: inherit;
     color: inherit;
@@ -35,22 +36,33 @@ button {
 
 /** Standby Screen **/
 
-.status-label {
-    display: block;
-    padding: 0.5em 1em;
-    margin-bottom: 1em;
-    font-size: 2.4rem;
-    font-weight: bold;
-    color: #110f13;
-    background-color: #fcffff;
+.search {
+    text-align: center;
 }
 
 
-.status {
-    padding: 0 2rem;
+.search__input {
+    display: block;
+    width: 80vw;
+    padding: 0.5em 0.75em;
+    border: 5px solid #fcffff;
     font-size: 6rem;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
+    background-color: transparent;
+}
+
+
+.search__button {
+    padding: 0.75em 1.25em;
+    border: none;
+    margin-top: 4rem;
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #110f13;
+    background-color: #fcffff;
+    cursor: pointer;
 }
 
 
@@ -145,13 +157,17 @@ button {
 
     /** Standby Screen **/
 
-    .status-label {
-        font-size: 1.2rem;
+    .search__input {
+        width: 500px;
+        max-width: 80vw;
+        border-width: 2px;
+        font-size: 2rem;
     }
 
 
-    .status {
-        font-size: 3rem;
+    .search__button {
+        margin-top: 2rem;
+        font-size: 2rem;
     }
 
 
