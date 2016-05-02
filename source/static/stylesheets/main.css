@@ -26,31 +26,61 @@ body {
 }
 
 
+a,
+input,
 button {
     font: inherit;
     color: inherit;
 }
 
 
-
-/** Standby Screen **/
-
-.status-label {
-    display: block;
-    padding: 0.5em 1em;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #110f13;
-    background-color: #fcffff;
+.page-footer {
+    padding: 4rem 1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
 }
 
 
-.status {
-    padding: 0 2rem;
-    font-size: 3rem;
+.page-footer a {
+    margin: 0 5rem;
+    font-size: 3.2rem;
+    text-decoration: none;
+}
+
+
+
+/** Standby Screen **/
+
+.search {
     text-align: center;
+}
+
+
+.search__input {
+    display: block;
+    width: 80vw;
+    padding: 0.5em 0.75em;
+    border: 5px solid #fcffff;
+    font-size: 6rem;
+    text-align: left;
     text-transform: uppercase;
+    background-color: transparent;
+}
+
+
+.search__button {
+    padding: 0.75em 1.25em;
+    border: none;
+    margin-top: 4rem;
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #110f13;
+    background-color: #fcffff;
+    cursor: pointer;
 }
 
 
@@ -58,20 +88,19 @@ button {
 /** Person Screen **/
 
 .person {
-    width: 300px;
-    max-width: 80vw;
-    padding: 1rem;
+    width: 80vw;
+    padding: 2rem;
     padding-bottom: 0;
-    border: 2px solid #fcffff;
-    border-radius: 5px;
+    border: 5px solid #fcffff;
+    border-radius: 10px;
 }
 
 
 .person__header {
     display: block;
     padding: 0.5em 1em;
-    margin: -1rem -1rem 1rem -1rem;
-    font-size: 1.2rem;
+    margin: -2.2rem -2.2rem 2rem -2.2rem;
+    font-size: 2.4rem;
     font-weight: bold;
     text-align: center;
     color: #110f13;
@@ -81,8 +110,8 @@ button {
 
 .person__image {
     width: 100%;
-    border: 2px dashed #e7e574;
-    margin-bottom: 1rem;
+    border: 5px dashed #e7e574;
+    margin-bottom: 2rem;
     position: relative;
 }
 
@@ -94,23 +123,23 @@ button {
 
 
 .person__image img {
-    width: calc(100% - 2rem);
+    width: calc(100% - 4rem);
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: 2rem;
+    left: 2rem;
 }
 
 
 .field {
     border-top: 1px solid #fcffff;
     padding: 0.5em calc(2rem + 2px);
-    margin: 0 -1rem;
-    font-size: 1.6rem;
+    margin: 0 -2rem;
+    font-size: 3.2rem;
 }
 
 
 .field__label {
-    font-size: 1.2rem;
+    font-size: 2.4rem;
     opacity: 0.5;
 }
 
@@ -120,8 +149,8 @@ button {
 
 .new-number-text {
     padding: 0 2rem;
-    margin-bottom: 2rem;
-    font-size: 3rem;
+    margin-bottom: 4rem;
+    font-size: 6rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -130,7 +159,7 @@ button {
 .notify-assets-btn {
     padding: 0.75em 1.25em;
     border: none;
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: bold;
     text-transform: uppercase;
     color: #110f13;
@@ -140,10 +169,94 @@ button {
 
 
 
-/** Widgets **/
 
-.tracker {
-    width: 10rem;
-    height: 10rem;
-    border: 3px dashed #ebe97a;
+
+@media all and (min-device-width: 425px) {
+
+    .page-footer {
+        padding: 2rem 1rem;
+    }
+
+
+    .page-footer a {
+        font-size: 1.6rem;
+    }
+
+
+    /** Standby Screen **/
+
+    .search__input {
+        width: 500px;
+        max-width: 80vw;
+        border-width: 2px;
+        font-size: 2rem;
+    }
+
+
+    .search__button {
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+
+
+    /** Person Screen **/
+
+    .person {
+        width: 300px;
+        max-width: 80vw;
+        padding: 1rem;
+        border: 2px solid #fcffff;
+        border-radius: 5px;
+    }
+
+
+    .person__header {
+        margin: -1rem -1rem 1rem -1rem;
+        font-size: 1.2rem;
+    }
+
+
+    .person__image {
+        border: 2px dashed #e7e574;
+        margin-bottom: 1rem;
+    }
+
+    .person__image::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+
+
+    .person__image img {
+        width: calc(100% - 2rem);
+        top: 1rem;
+        left: 1rem;
+    }
+
+
+    .field {
+        margin: 0 -1rem;
+        font-size: 1.6rem;
+    }
+
+
+    .field__label {
+        font-size: 1.2rem;
+    }
+
+
+
+    /** Admin Screen **/
+
+    .new-number-text {
+        margin-bottom: 2rem;
+        font-size: 3rem;
+    }
+
+
+    .notify-assets-btn {
+        font-size: 2rem;
+    }
 }
