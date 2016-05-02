@@ -55,6 +55,21 @@ router.post('/subscribe', function(req, res) {
 });
 
 
+router.post('/unsubscribe', function(req, res) {
+    var query = [['filter', 'id', '=', req.body.id]];
+    subscriptions.query(query)
+        .then(function(results) {
+            if (results.length) {
+                return subscriptions.delete(results[0].key.id);
+            }
+            return {};
+        })
+        .then(function(key) {
+            res.status(200).end();
+        });
+});
+
+
 router.post('/notify', function(req, res) {
     subscriptions.all().then(function(results) {
         if (results.length > 0) {

@@ -48,6 +48,29 @@ function subscribeToPushNotifications() {
 }
 
 
+function unsubscribeFromPushNotifications() {
+    navigator.serviceWorker.getRegistration()
+        .then(function(registration) {
+            if (!registration) {
+                console.error('No service worker registered yet.');
+                return;
+            }
+            registration.pushManager.getSubscription()
+                .then(function(subscription) {
+                    if (!subscription) {
+                        return;
+                    }
+                    subscription.unsubscribe().then(function() {
+                        sendSubscriptionToServer('unsubscribe', subscription);
+                    });
+                });
+        })
+        .catch(function(error) {
+            console.error('getRegistration() error', error);
+        });
+}
+
+
 function sendSubscriptionToServer(action, subscription) {
     var subscriptionId = subscription.endpoint.split('/').pop();
     var request = new Request('/' + action, {
@@ -59,3 +82,16 @@ function sendSubscriptionToServer(action, subscription) {
         console.error('Subscription error', error);
     });
 }
+
+
+
+
+
+document.addEventListener('click', function(e) {
+    var target = e.target;
+    if (target.matches('.unsubscribe-link')) {
+        e.preventDefault();
+        unsubscribeFromPushNotifications();
+        target.parentNode.removeChild(target);
+    }
+});
