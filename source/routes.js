@@ -11,6 +11,11 @@ router.get('/', function(req, res) {
 });
 
 
+router.get('/admin', function(req, res) {
+    res.render('admin.html');
+});
+
+
 router.get('/:id', function(req, res) {
     var query = [['filter', 'id', '=', parseInt(req.params.id)]];
     people.query(query).then(function(results) {

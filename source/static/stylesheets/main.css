@@ -16,7 +16,15 @@ body {
     height: 100vh;
     font-family: "Ubuntu Mono", monospace;
     color: #fcffff;
+    text-transform: uppercase;
+    color: #fcffff;
     background-color: #110f13;
+}
+
+
+button {
+    font: inherit;
+    color: inherit;
 }
 
 
@@ -37,7 +45,6 @@ body {
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
-    text-transform: uppercase;
     color: #110f13;
     background-color: #fcffff;
 }
@@ -78,7 +85,6 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
-    text-transform: uppercase;
     color: #110f13;
     background-color: #fcffff;
 }
@@ -116,8 +122,39 @@ body {
 
 .screen--person .field__label {
     font-size: 1.2rem;
-    text-transform: uppercase;
     opacity: 0.5;
+}
+
+
+
+/** Admin Screen **/
+
+.screen--admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.screen--admin .new-number-text {
+    padding: 0 2rem;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.notify-assets-btn {
+    padding: 1em 2em;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #110f13;
+    background-color: #fcffff;
+    cursor: pointer;
 }
 
 
