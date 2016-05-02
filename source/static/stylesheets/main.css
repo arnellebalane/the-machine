@@ -13,6 +13,10 @@ html {
 
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     font-family: "Ubuntu Mono", monospace;
     color: #fcffff;
@@ -31,15 +35,7 @@ button {
 
 /** Standby Screen **/
 
-.screen--standby {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.screen--standby .status-label {
+.status-label {
     display: block;
     padding: 0.5em 1em;
     margin-bottom: 1rem;
@@ -50,7 +46,7 @@ button {
 }
 
 
-.screen--standby .status {
+.status {
     padding: 0 2rem;
     font-size: 3rem;
     text-align: center;
@@ -61,14 +57,7 @@ button {
 
 /** Person Screen **/
 
-.screen--person {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.screen--person .person {
+.person {
     width: 300px;
     max-width: 80vw;
     padding: 1rem;
@@ -78,7 +67,7 @@ button {
 }
 
 
-.screen--person .person__header {
+.person__header {
     display: block;
     padding: 0.5em 1em;
     margin: -1rem -1rem 1rem -1rem;
@@ -90,21 +79,21 @@ button {
 }
 
 
-.screen--person .person__image {
+.person__image {
     width: 100%;
     border: 2px dashed #e7e574;
     margin-bottom: 1rem;
     position: relative;
 }
 
-.screen--person .person__image::before {
+.person__image::before {
     content: "";
     display: block;
     padding-top: 100%;
 }
 
 
-.screen--person .person__image img {
+.person__image img {
     width: calc(100% - 2rem);
     position: absolute;
     top: 1rem;
@@ -112,7 +101,7 @@ button {
 }
 
 
-.screen--person .field {
+.field {
     border-top: 1px solid #fcffff;
     padding: 0.5em calc(2rem + 2px);
     margin: 0 -1rem;
@@ -120,7 +109,7 @@ button {
 }
 
 
-.screen--person .field__label {
+.field__label {
     font-size: 1.2rem;
     opacity: 0.5;
 }
@@ -129,15 +118,7 @@ button {
 
 /** Admin Screen **/
 
-.screen--admin {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.screen--admin .new-number-text {
+.new-number-text {
     padding: 0 2rem;
     margin-bottom: 1rem;
     font-size: 3rem;
