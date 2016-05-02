@@ -18,6 +18,7 @@
     "express": "^4.13.4",
     "gcloud": "^0.31.0",
     "nconf": "^0.8.4",
-    "nunjucks": "^2.4.2"
+    "nunjucks": "^2.4.2",
+    "request": "^2.72.0"
   }
 }

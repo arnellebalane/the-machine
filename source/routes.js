@@ -1,5 +1,7 @@
 var express = require('express');
+var request = require('request');
 var datastore = require('./lib/datastore');
+var config = require('./config');
 
 
 var router = express.Router();
@@ -33,6 +35,44 @@ router.post('/subscribe', function(req, res) {
     }
     res.status(200).end();
 });
+
+
+router.post('/notify', function(req, res) {
+    if (subscriptions.length) {
+        getRandomPerson().then(function(person) {
+            var options = {
+                url: 'https://android.googleapis.com/gcm/send',
+                headers: {
+                    Authorization: 'key=' + config.get('GCM_API_KEY')
+                },
+                body: {
+                    registration_ids: subscriptions,
+                    notification: {
+                        title: 'We have a new number.',
+                        body: person.name,
+                        icon: person.image
+                    }
+                },
+                json: true
+
+            };
+            request.post(options);
+        });
+    }
+    res.status(200).end();
+});
+
+
+function getRandomPerson() {
+    var id = Math.floor(Math.random() * 100) + 1;
+    var query = [
+        ['filter', 'id', '=', id],
+        ['limit', 1]
+    ];
+    return people.query(query).then(function(results) {
+        return results[0];
+    });
+}
 
 
 module.exports = router;
