@@ -1,0 +1,21 @@
+{
+  "name": "the-machine",
+  "version": "0.0.0",
+  "description": "Service Workers Demo with Person Of Interest references.",
+  "main": "source/app.js",
+  "scripts": {
+    "start": "node source/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "~6.0"
+  },
+  "keywords": [],
+  "author": "Arnelle Balane <arnellebalane@gmail.com> (github.com/arnellebalane)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "nconf": "^0.8.4",
+    "nunjucks": "^2.4.2"
+  }
+}
