@@ -16,7 +16,7 @@ router.get('/admin', function(req, res) {
 });
 
 
-router.get('/:id', function(req, res) {
+router.get('/person/:id', function(req, res) {
     var query = [['filter', 'id', '=', parseInt(req.params.id)]];
     people.query(query).then(function(results) {
         res.render('person.html', { person: results[0] });
