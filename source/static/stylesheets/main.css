@@ -52,6 +52,76 @@ body {
 
 
 
+/** Person Screen **/
+
+.screen--person {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.screen--person .person {
+    width: 300px;
+    max-width: 80vw;
+    padding: 1rem;
+    padding-bottom: 0;
+    border: 2px solid #fcffff;
+    border-radius: 5px;
+}
+
+
+.screen--person .person__header {
+    display: block;
+    padding: 0.5em 1em;
+    margin: -1rem -1rem 1rem -1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #110f13;
+    background-color: #fcffff;
+}
+
+
+.screen--person .person__image {
+    width: 100%;
+    border: 2px dashed #e7e574;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.screen--person .person__image::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+
+.screen--person .person__image img {
+    width: calc(100% - 2rem);
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+
+.screen--person .field {
+    border-top: 1px solid #fcffff;
+    padding: 0.5em calc(2rem + 2px);
+    margin: 0 -1rem;
+    font-size: 1.6rem;
+}
+
+
+.screen--person .field__label {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0.5;
+}
+
+
+
 /** Widgets **/
 
 .tracker {

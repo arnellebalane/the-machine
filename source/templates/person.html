@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block bodyclasses %}screen--person{% endblock %}
+
+{% block content %}
+    <div class="person">
+        <h1 class="person__header">Target Data</h1>
+
+        <figure class="person__image">
+            <img src="{{ person.image }}" alt="{{ person.name }}">
+        </figure>
+
+        <div class="field">
+            <p class="field__label">Name</p>
+            <p class="field__value">{{ person.name }}</p>
+        </div>
+        <div class="field">
+            <p class="field__label">Address</p>
+            <p class="field__value">{{ person.address }}</p>
+        </div>
+        <div class="field">
+            <p class="field__label">Birthdate</p>
+            <p class="field__value">{{ person.birthdate }}</p>
+        </div>
+    </div>
+{% endblock %}
