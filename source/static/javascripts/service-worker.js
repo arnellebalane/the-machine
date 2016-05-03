@@ -19,7 +19,20 @@ self.addEventListener('fetch', function(event) {
             if (cachedResponse) {
                 return cachedResponse;
             }
-            return fetch(event.request);
+            return fetch(event.request).then(function(fetchedResponse) {
+                if (event.request.url.indexOf('swcache=false') === -1) {
+                    console.log('CACHING REQUEST', event.request);
+                    var clonedResponse = fetchedResponse.clone();
+                    return caches.open('the-machine')
+                        .then(function(cache) {
+                            return cache.put(event.request, clonedResponse);
+                        })
+                        .then(function() {
+                            return fetchedResponse;
+                        });
+                }
+                return fetchedResponse;
+            });
         })
     );
 });
