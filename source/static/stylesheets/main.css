@@ -18,7 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: "Ubuntu Mono", monospace;
+    font-family: "Ubuntu Mono", "Andale Mono", "Consolas", monospace;
     color: #fcffff;
     text-transform: uppercase;
     color: #fcffff;
@@ -169,6 +169,39 @@ button {
 
 
 
+/** Message Screen **/
+
+.message-form {
+    text-align: center;
+}
+
+
+.message__input {
+    display: block;
+    width: 80vw;
+    padding: 0.5em 0.75em;
+    border: 5px solid #fcffff;
+    font-size: 6rem;
+    text-align: left;
+    text-transform: uppercase;
+    background-color: transparent;
+}
+
+
+.message__button {
+    padding: 0.75em 1.25em;
+    border: none;
+    margin-top: 4rem;
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #110f13;
+    background-color: #fcffff;
+    cursor: pointer;
+}
+
+
+
 
 
 @media all and (min-device-width: 425px) {
@@ -257,6 +290,23 @@ button {
 
 
     .notify-assets-btn {
+        font-size: 2rem;
+    }
+
+
+
+    /** Standby Screen **/
+
+    .message__input {
+        width: 500px;
+        max-width: 80vw;
+        border-width: 2px;
+        font-size: 2rem;
+    }
+
+
+    .message__button {
+        margin-top: 2rem;
         font-size: 2rem;
     }
 }

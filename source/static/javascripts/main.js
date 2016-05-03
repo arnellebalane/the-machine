@@ -16,7 +16,7 @@ function initializeServiceWorker(registration) {
     } else if (Notification.permission === 'denied') {
         console.warn('Notifications are blocked in this browser.');
         return;
-    } else if (!('pushManager' in registration)) {
+    } else if (!('PushManager' in window)) {
         console.warn('Push notifications are not supported in this browser.');
         return;
     }
@@ -80,6 +80,72 @@ function sendSubscriptionToServer(action, subscription) {
 }
 
 
+function sendMessageToServer(message) {
+    sendMessageUsingBackgroundSync(message).catch(function(error) {
+        console.error('Error sending message using background sync', error);
+        sendMessageUsingFetch(message);
+    });
+}
+
+
+function sendMessageUsingBackgroundSync(message) {
+    return new Promise(function(resolve, reject) {
+        if ('SyncManager' in window) {
+            return navigator.serviceWorker.getRegistration()
+                .then(function(registration) {
+                    return registration.sync.register('send-message')
+                        .then(function() {
+                            return storeMessageLocally(message);
+                        });
+                })
+                .catch(function(error) {
+                    console.error('getRegistration() error', error);
+                    sendMessageUsingFetch(message);
+                });
+        }
+        reject(message);
+    });
+}
+
+
+function sendMessageUsingFetch(message) {
+    var request = new Request('/message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+    });
+    fetch(request).catch(function(error) {
+        console.error('Message sending error', error);
+    });
+}
+
+
+
+
+
+var DB_NAME = 'message-storage';
+
+var idb = indexedDB.open(DB_NAME, 1);
+var db;
+
+idb.onupgradeneeded = function(e) {
+    var objectStore = e.target.result
+        .createObjectStore('messages', { autoIncrement: true });
+    objectStore.createIndex('message', 'message', { unique: false });
+};
+
+idb.onsuccess = function(e) {
+    db = e.target.result;
+};
+
+
+function storeMessageLocally(message) {
+    var transaction = db.transaction(['messages'], 'readwrite');
+    var objectStore = transaction.objectStore('messages');
+    objectStore.add({ message: message });
+}
+
+
 
 
 
@@ -91,3 +157,14 @@ document.addEventListener('click', function(e) {
         target.parentNode.removeChild(target);
     }
 });
+
+
+var messageForm = document.querySelector('.message-form');
+if (messageForm) {
+    messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var message = this.message.value;
+        this.message.value = '';
+        sendMessageToServer(message);
+    });
+}
