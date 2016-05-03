@@ -5,6 +5,7 @@ self.addEventListener('install', function(event) {
                 '/',
                 '/static/stylesheets/main.css',
                 '/static/javascripts/main.js',
+                '/service-worker.js',
                 '/manifest.json'
             ]);
         })
