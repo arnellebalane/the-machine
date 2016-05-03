@@ -78,7 +78,7 @@ self.addEventListener('sync', function(event) {
                     var request = new Request('/message', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stri({ message: message.message })
+                        body: JSON.stringify({ message: message.message })
                     });
                     return fetch(request).catch(function(error) {
                         console.error('Error sending message', error);
