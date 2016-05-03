@@ -70,5 +70,68 @@ self.addEventListener('notificationclick', function(event) {
 
 
 self.addEventListener('sync', function(event) {
-    console.info(event);
+    event.waitUntil(
+        getAllMessages()
+            .then(function(messages) {
+                return Promise.all(messages.map(function(message) {
+                    var request = new Request('/message', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: message.message })
+                    });
+                    return fetch(request).catch(function(error) {
+                        console.error('Error sending message', error);
+                    });
+                }));
+            })
+            .then(function() {
+                deleteAllMessages();
+            })
+            .catch(function(error) {
+                console.log('Background sync error', error);
+            })
+    );
 });
+
+
+
+
+
+var DB_NAME = 'message-storage';
+
+var idb = indexedDB.open(DB_NAME, 1);
+var db;
+
+idb.onsuccess = function(e) {
+    db = e.target.result;
+};
+
+
+function getAllMessages() {
+    return new Promise(function(resolve, reject) {
+        var transaction = db.transaction(['messages'], 'readonly');
+        var objectStore = transaction.objectStore('messages');
+        var cursorRequest = objectStore.openCursor();
+        var items = [];
+
+        cursorRequest.onsuccess = function(e) {
+            var cursor = e.target.result;
+            if (cursor) {
+                items.push(cursor.value);
+                cursor.continue();
+            } else {
+                resolve(items);
+            }
+        };
+    });
+}
+
+
+function deleteAllMessages() {
+    return new Promise(function(resolve, reject) {
+        var transaction = db.transaction(['messages'], 'readwrite');
+        var objectStore = transaction.objectStore('messages');
+        var request = objectStore.clear();
+        request.onsuccess = resolve;
+    });
+}
