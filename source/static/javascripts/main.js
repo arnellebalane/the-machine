@@ -73,12 +73,8 @@ function unsubscribeFromPushNotifications() {
 
 function sendSubscriptionToServer(action, subscription) {
     var subscriptionId = subscription.endpoint.split('/').pop();
-    var request = new Request('/' + action, {
-        method: 'POST',
-        body: JSON.stringify({ id: subscriptionId }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-    fetch(request).catch(function(error) {
+    var url = '/' + action + '?id=' + subscriptionId + '&swcache=false';
+    fetch(url).catch(function(error) {
         console.error('Subscription error', error);
     });
 }
