@@ -67,3 +67,8 @@ self.addEventListener('notificationclick', function(event) {
     event.notification.close();
     event.waitUntil(self.clients.openWindow('/'));
 });
+
+
+self.addEventListener('sync', function(event) {
+    console.info(event);
+});

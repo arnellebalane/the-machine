@@ -16,7 +16,7 @@ function initializeServiceWorker(registration) {
     } else if (Notification.permission === 'denied') {
         console.warn('Notifications are blocked in this browser.');
         return;
-    } else if (!('pushManager' in registration)) {
+    } else if (!('PushManager' in window)) {
         console.warn('Push notifications are not supported in this browser.');
         return;
     }
@@ -80,6 +80,34 @@ function sendSubscriptionToServer(action, subscription) {
 }
 
 
+function sendMessageToServer(message) {
+    if ('SyncManager' in window) {
+        navigator.serviceWorker.getRegistration()
+            .then(function(registration) {
+                registration.sync.register('send-message')
+                    .then(function(event) {
+                        console.info('Sync registration successful', event);
+                    })
+                    .catch(function(error) {
+                        console.error('Sync registration error', error);
+                    });
+            })
+            .catch(function(error) {
+                console.error('getRegistration() error', error);
+            });
+    } else {
+        var request = new Request('/message', {
+            type: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: { message: message }
+        });
+        fetch(request).catch(function(error) {
+            console.error('Message sending error', error);
+        });
+    }
+}
+
+
 
 
 
@@ -91,3 +119,14 @@ document.addEventListener('click', function(e) {
         target.parentNode.removeChild(target);
     }
 });
+
+
+var messageForm = document.querySelector('.message-form');
+if (messageForm) {
+    messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var message = this.message.value;
+        this.message.value = '';
+        sendMessageToServer(message);
+    });
+}
