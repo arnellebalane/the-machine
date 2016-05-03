@@ -6,6 +6,7 @@ self.addEventListener('install', function(event) {
         caches.open(CACHE_NAME).then(function(cache) {
             cache.addAll([
                 '/',
+                '/message',
                 '/static/stylesheets/main.css',
                 '/static/javascripts/main.js',
                 '/manifest.json'
@@ -77,7 +78,7 @@ self.addEventListener('sync', function(event) {
                     var request = new Request('/message', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ message: message.message })
+                        body: JSON.stri({ message: message.message })
                     });
                     return fetch(request).catch(function(error) {
                         console.error('Error sending message', error);
