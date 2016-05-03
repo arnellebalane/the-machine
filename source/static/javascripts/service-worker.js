@@ -36,7 +36,6 @@ self.addEventListener('fetch', function(event) {
             }
             return fetch(event.request).then(function(fetchedResponse) {
                 if (event.request.url.indexOf('swcache=false') === -1) {
-                    console.log('CACHING REQUEST', event.request);
                     var clonedResponse = fetchedResponse.clone();
                     return caches.open(CACHE_NAME)
                         .then(function(cache) {
