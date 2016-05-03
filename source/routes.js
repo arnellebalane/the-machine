@@ -39,8 +39,8 @@ router.get('/person/:id', function(req, res) {
 });
 
 
-router.post('/subscribe', function(req, res) {
-    var id = req.body.id;
+router.get('/subscribe', function(req, res) {
+    var id = req.query.id;
     var query = [['filter', 'id', '=', id]];
     subscriptions.query(query)
         .then(function(results) {
@@ -55,8 +55,8 @@ router.post('/subscribe', function(req, res) {
 });
 
 
-router.post('/unsubscribe', function(req, res) {
-    var query = [['filter', 'id', '=', req.body.id]];
+router.get('/unsubscribe', function(req, res) {
+    var query = [['filter', 'id', '=', req.query.id]];
     subscriptions.query(query)
         .then(function(results) {
             if (results.length) {
