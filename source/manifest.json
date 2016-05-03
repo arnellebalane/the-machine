@@ -1,6 +1,14 @@
 {
     "name": "The Machine",
     "short_name": "The Machine",
-    "icons": [],
+    "icons": [
+        {
+            "src": "/static/images/logo.png",
+            "size": "200x200",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
     "gcm_sender_id": "200704710360"
 }
