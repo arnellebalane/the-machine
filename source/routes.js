@@ -7,6 +7,7 @@ var config = require('./config');
 var router = express.Router();
 var people = datastore('people');
 var subscriptions = datastore('subscriptions');
+var messages = datastore('messages');
 
 
 router.get('/', function(req, res) {
@@ -99,6 +100,19 @@ router.post('/notify', function(req, res) {
         }
     });
     res.status(200).end();
+});
+
+
+router.get('/message', function(req, res) {
+    res.render('message.html');
+});
+
+
+router.post('/message', function(req, res) {
+    var message = { message: req.body.message };
+    messages.create(message).then(function() {
+        res.redirect('/message');
+    });
 });
 
 
